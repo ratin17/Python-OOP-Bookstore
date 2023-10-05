@@ -142,10 +142,11 @@ while True:
         else:
             print("Options:\n")
             print("1: Borrow Book")
-            print("2: return Book")
-            print("3: Show Borrowed books")
-            print("4: Show History")
-            print("5: Logout")
+            print("2: Return Book")
+            print("3: Show All Books")
+            print("4: Show Borrowed books")
+            print("5: Show History")
+            print("6: Logout")
             
             ch=int(input("Enter Option:"))
             
@@ -157,18 +158,31 @@ while True:
                 bsk.returnBook(currentUser,name)
                 
             elif ch==3:
+                print("\n\tAll Books:\n")
+                for book in bsk.books:
+                    if book in currentUser.borrowedBooks:
+                        print(f'\t{book.id}\t{book.name}\t{book.quantity}\tReading Now..')
+                    elif book in currentUser.returnedBooks:
+                        print(f'\t{book.id}\t{book.name}\t{book.quantity}\tAlready Read')
+                    else:
+                        print(f'\t{book.id}\t{book.name}\t{book.quantity}\tDid not Read')
+                     
+                
+                print("\n")
+                
+            elif ch==4:
                 print("\n\tBorrowed Books:\n")
                 for book in currentUser.borrowedBooks:
                      print(f'\t{book.id}\t{book.name}\t{book.quantity}')
                 print("\n")
                 
-            elif ch==4:
+            elif ch==5:
                 print("\n\tHistory:\n")
                 for book in currentUser.returnedBooks:
                      print(f'\t{book.id}\t{book.name}\t{book.quantity}')
                 print("\n")
                 
-            elif ch==5:
+            elif ch==6:
                 currentUser=None
                     
             
