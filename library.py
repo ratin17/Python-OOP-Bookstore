@@ -23,7 +23,8 @@ class Library:
     def addBook(self,id,name,quantity):
         book=Book(id,name,quantity)
         self.books.append(book)
-        print(f"{book.name} added succesfully !\n")
+        
+        print(f"\n\t---> {book.name} added succesfully !\n")
         
     def addUser(self,id,name,password):
         user=User(id,name,password)
@@ -35,18 +36,18 @@ class Library:
         for book in self.books:
             if book.name==token:
                 if book in user.borrowedBooks:
-                    print("Already borrowed !\n")
+                    print("\n\t---> Already borrowed !\n")
                     return
                 elif book.quantity==0:
-                    print("No Copy Available !\n")
+                    print("\n\t---> No Copy Available !\n")
                     return
                 else:
                     user.borrowedBooks.append(book)
                     book.quantity-=1
-                    print("Borrowed book Succesfully !\n")
+                    print("\n\t---> Borrowed book Succesfully !\n")
                     return
         
-        print(f"Not found any book with name {token}! \n")
+        print(f"\n\t---> Not found any book with name {token}! \n")
         
 
     def returnBook(self,user,token):
@@ -57,12 +58,13 @@ class Library:
                     book.quantity+=1
                     user.returnedBooks.append(book)
                     user.borrowedBooks.remove(book)
-                    print("Returned book Succesfully !\n")
+                    print("\n\t---> Returned book Succesfully !\n")
+                    return
                 elif book.quantity==0:
-                    print("No Copy Available !\n")
+                    print("\n\t---> No Copy Available !\n")
                     return
                 
-        print(f"Not found any book with name {token}! \n")
+        print(f"\n\t---> Not found any book with name {token}! \n")
 
 bsk=Library("Bishwa Shahitja Kendro")
 admin=bsk.addUser(1000,"admin","admin")
@@ -73,7 +75,7 @@ currentUser=admin
 
 while True:
     if currentUser==None:
-        print("No loggen in user\n")
+        print("\n\t---> No logged in user\n")
         
         option=input("Login or Register (L/R) :")
         
@@ -103,7 +105,9 @@ while True:
              currentUser=user
     
     else:
-        print(f"\nWelcome Back {currentUser.name} !\n")
+        print("\n------------------------------------")
+        print(f"Welcome Back {currentUser.name} !")
+        print("------------------------------------")
         
         if currentUser.name=="admin":
                         
@@ -125,8 +129,10 @@ while True:
             
              elif ch==3:
                  
+                 print("\n\tBook List:\n")
+                 
                  for book in bsk.books:
-                     print(f'{book.id}\t{book.name}\t{book.quantity}')
+                     print(f'\t{book.id}\t{book.name}\t{book.quantity}')
                  print("\n")
              
              elif ch==4:
@@ -151,15 +157,15 @@ while True:
                 bsk.returnBook(currentUser,name)
                 
             elif ch==3:
-                print("\nBorrowed Books:\n")
+                print("\n\tBorrowed Books:\n")
                 for book in currentUser.borrowedBooks:
-                     print(f'{book.id}\t{book.name}\t{book.quantity}')
+                     print(f'\t{book.id}\t{book.name}\t{book.quantity}')
                 print("\n")
                 
             elif ch==4:
-                print("\nHistory:\n")
+                print("\n\tHistory:\n")
                 for book in currentUser.returnedBooks:
-                     print(f'{book.id}\t{book.name}\t{book.quantity}')
+                     print(f'\t{book.id}\t{book.name}\t{book.quantity}')
                 print("\n")
                 
             elif ch==5:
